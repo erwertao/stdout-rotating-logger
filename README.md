@@ -10,3 +10,13 @@ nohup target | python3 looger.py &
 Then you can use:
 nc 127.0.0.1 [PORT]
 to check the output of target
+
+
+But if in linux system, the redirect stdout will change from Line buffered to full buffered.
+So even if the line has been printed, it won't flush in full buffer mode.
+You can use :
+   stdbuf -oL target
+to run the target with line buffer stdout mode.
+stdbuf may not work if your target is python3,you can use:
+    python3 -u target.py
+to enable line buffer mode.
